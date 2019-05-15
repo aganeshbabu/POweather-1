@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>birdseyev2HTML</title>
+    <script src="../../../ClientGlobalContext.js.aspx" type="text/javascript"></script>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <style type='text/css'>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI',Helvetica,Arial,Sans-Serif
+        }
+    </style>
+</head>
+<body>
+    <div id='printoutPanel'></div>
+
+    <div id='myMap' style='width: 100vw; height: 100vh;'></div>
+    <script type='text/javascript'>
+        function loadMapScenario(id) {
+
+
+
+            var latitude = window.parent.Xrm.Page.getAttribute("dwi_latitude").getValue();
+            var longitude = window.parent.Xrm.Page.getAttribute("dwi_longitude").getValue();
+            var City = window.parent.Xrm.Page.getAttribute("dwi_city").getValue();
+
+
+
+
+
+            //var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+            //    /* No need to set credentials if already passed in URL */
+            //    center: new Microsoft.Maps.Location(latitude, longitude),
+            //    zoom: 5
+            //});
+
+            //To Show Weather info for a particular location
+            //Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+            //    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+            //    var requestOptions = {
+            //        bounds: map.getBounds(),
+            //        where: City,
+            //        callback: function (answer, userData) {
+            //            map.setView({ bounds: answer.results[0].bestView });
+            //            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location, { title: 'Temp 100'}));
+            //        }
+            //    };
+            //    searchManager.geocode(requestOptions);
+
+            //});
+
+            //Heat Map
+            //Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', function () {
+            //    // Creating sample Pushpin data within map view
+            //    var mapDiv = map.getRootElement();
+            //    var locations = [];
+            //    for (var i = 0; i < 300; i++) {
+            //        var randomLocation = map.tryPixelToLocation(new Microsoft.Maps.Point(mapDiv.clientWidth * Math.random(), mapDiv.clientHeight * Math.random()), Microsoft.Maps.PixelReference.control);
+            //        locations.push(randomLocation);
+            //        locations.push(randomLocation.clone());
+            //    }
+            //    for (i = 0; i < 400; i++) {
+            //        locations.push(map.tryPixelToLocation(new Microsoft.Maps.Point(mapDiv.clientWidth * Math.random(), mapDiv.clientHeight * Math.random()), Microsoft.Maps.PixelReference.control));
+            //    }
+            //    var heatMap = new Microsoft.Maps.HeatMapLayer(locations, {
+            //        intensity: 0.65,
+            //        radius: 10,
+            //        colorGradient: {
+            //            '0': 'Black',
+            //            '0.4': 'Purple',
+            //            '0.6': 'Red',
+            //            '0.8': 'Yellow',
+            //            '1': 'White'
+            //        },
+            //        aggregateLocationWeights: true
+            //    });
+            //    map.layers.insert(heatMap);
+            //});
+            //undefined;
+
+
+            // Tital wave
+
+            //var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+            //    /* No need to set credentials if already passed in URL */
+            //    center: new Microsoft.Maps.Location(latitude, longitude),
+            //    zoom: 5, mapTypeId: Microsoft.Maps.MapTypeId.aerial
+            //});
+
+
+
+            //// Custom tiles of Hurricane Katrina for zoom level 1-10
+            //var katrinaTileSource = new Microsoft.Maps.TileSource({
+            //    uriConstructor: 'https://bingmapsisdk.blob.core.windows.net/katrinatiles/{quadkey}.png',
+            //    minZoom: 1,
+            //    maxZoom: 10,
+            //    bounds: Microsoft.Maps.LocationRect.fromEdges(35.176, -101.065, 14.01, -80.538)
+            //});
+            //var katrinaTileLayer = new Microsoft.Maps.TileLayer({
+            //    mercator: katrinaTileSource,
+            //});
+            //map.layers.insert(katrinaTileLayer);
+
+
+
+            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                /* No need to set credentials if already passed in URL */
+                center: new Microsoft.Maps.Location(latitude, longitude),
+                zoom: 8
+            });
+
+            ////  var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
+            //    var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+            //        icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+            //        anchor: new Microsoft.Maps.Point(12, 39), text: 'W'+ 'wind speed : 100KMPH', textOffset: new Microsoft.Maps.Point(0, 5)
+            //    });
+            //    map.entities.push(pushpin);
+
+            //    pushpin.setOptions({ enableHoverStyle: true, enableClickedStyle: true });
+
+           // var withBreaks = "Min Temp : 30 " + '&#8451;' + ' <br/>' + "Max Temp: 330 " + '&#8451;';
+
+            var withBreaks = "City : " + City + ' <br/>' + "Lat : " + latitude + ' <br/>' + "Long : " + longitude 
+            var center = map.getCenter();
+            var infobox = new Microsoft.Maps.Infobox(center, {
+                title: City,
+                description: withBreaks
+            });
+            infobox.setMap(map);
+
+
+
+
+
+
+
+            //Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', function () {
+            //    // Creating sample Pushpin data within map view
+            //    var mapDiv = map.getRootElement();
+            //    var locations = [];
+            //    for (var i = 0; i < 300; i++) {
+            //        var randomLocation = map.tryPixelToLocation(new Microsoft.Maps.Point(mapDiv.clientWidth * Math.random(), mapDiv.clientHeight * Math.random()), Microsoft.Maps.PixelReference.control);
+            //        locations.push(randomLocation);
+            //        locations.push(randomLocation.clone());
+            //    }
+            //    for (i = 0; i < 400; i++) {
+            //        locations.push(map.tryPixelToLocation(new Microsoft.Maps.Point(mapDiv.clientWidth * Math.random(), mapDiv.clientHeight * Math.random()), Microsoft.Maps.PixelReference.control));
+            //    }
+            //    var heatMap = new Microsoft.Maps.HeatMapLayer(locations, {
+            //        intensity: 0.65,
+            //        radius: 10,
+            //        colorGradient: {
+            //            '0': 'Black',
+            //            '0.4': 'Purple',
+            //            '0.6': 'Red',
+            //            '0.8': 'Yellow',
+            //            '1': 'White'
+            //        },
+            //        aggregateLocationWeights: true
+            //    });
+            //    map.layers.insert(heatMap);
+            //});
+            //undefined;
+
+
+
+
+            //var center = map.getCenter();
+            //var infoboxTemplate = '<div id="infoboxText"  style="background-color:black; border-style:solid; border-width:medium; border-color:DarkOrange; min-height:100px; width: 240px; "><b id="infoboxTitle" style="position: absolute; top: 10px; left: 10px; width: 220px;color:white;  ">{title}</b><a id="infoboxDescription" style="position: absolute;color:white; top: 30px; left: 10px; width: 220px; ">{description}</a></div>';
+            //var infobox = new Microsoft.Maps.Infobox(center, {
+            //    htmlContent: infoboxTemplate.replace('{title}', City).replace('{description}', withBreaks)
+            //});
+            //infobox.setMap(map);
+
+
+
+
+        }
+
+
+        //function getdetails() {
+        //    var withBreaks = "Min Temp : 30 " + '&#8451;' + ' <br/>' + "Max Temp: 330 " + '&#8451;';
+        //    var center = map.getCenter();
+        //    var infobox = new Microsoft.Maps.Infobox(center, {
+        //        title: City,
+        //        description: withBreaks
+        //    });
+        //    infobox.setMap(map);
+
+        //}
+
+        
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AvxUqfvh3SwTJHfdZx4oqtoqC4-4A-4_7hauesCOI1-a22YQhzJWgBqQjTt1eKqY&callback=loadMapScenario' async defer></script>
+</body>
+</html>
+
+
+
