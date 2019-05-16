@@ -87,94 +87,51 @@
         /** Initializes the map and the custom popup. */
         function initMap() {
 
-            //Start
-            var RecordId = window.parent.Xrm.Page.data.entity.getId();
-            //alert(RecordId);
-            var rec = RecordId.replace("{", '').replace("}", '');
-            // alert(rec);
-         //start
-            var req = new XMLHttpRequest();
-            req.open("GET", window.parent.Xrm.Page.context.getClientUrl() + "/api/data/v9.1/pow_weatherinfos(3242342342)?$select=_pow_location_value&$expand=pow_location($select=pow_city,pow_geolocationid,pow_lattitude,pow_longitude,pow_timezone)", true);
-            req.setRequestHeader("OData-MaxVersion", "4.0");
-            req.setRequestHeader("OData-Version", "4.0");
-            req.setRequestHeader("Accept", "application/json");
-            req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-            req.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    req.onreadystatechange = null;
-                    if (this.status === 200) {
-                        var result = JSON.parse(this.response);
-                        var _pow_location_value = result["_pow_location_value"];
-                        var _pow_location_value_formatted = result["_pow_location_value@OData.Community.Display.V1.FormattedValue"];
-                        var _pow_location_value_lookuplogicalname = result["_pow_location_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
-                        if (result.hasOwnProperty("pow_location")) {
-                            var pow_location_pow_city = result["pow_location"]["pow_city"];
-                            var pow_location_pow_geolocationid = result["pow_location"]["pow_geolocationid"];
-                            var pow_location_pow_lattitude = result["pow_location"]["pow_lattitude"];
-                            var pow_location_pow_lattitude_formatted = result["pow_location"]["pow_lattitude@OData.Community.Display.V1.FormattedValue"];
-                            var pow_location_pow_longitude = result["pow_location"]["pow_longitude"];
-                            var pow_location_pow_longitude_formatted = result["pow_location"]["pow_longitude@OData.Community.Display.V1.FormattedValue"];
-                            var pow_location_pow_timezone = result["pow_location"]["pow_timezone"];
-
-                            var map = new google.maps.Map(document.getElementById('map'), {
-                                center: { lat: pow_location_pow_lattitude , lng: pow_location_pow_longitude },
-                                zoom: 7
-                            });
-
-                            var layer = new google.maps.FusionTablesLayer({
-                                query: {
-                                    select: 'location',
-                                    from: '1xWyeuAhIFK_aED1ikkQEGmR8mINSCJO9Vq-BPQ'
-                                },
-                                heatmap: {
-                                    enabled: true
-                                }
-
-                            });
-
-                            layer.setMap(map);
-
-                            //change this according to your requirement -Start
-                            var City = window.parent.Xrm.Page.getAttribute("pow_weathercity").getValue();
-                            var Conditions = window.parent.Xrm.Page.getAttribute("pow_condition").getValue();
-                            var Temp = window.parent.Xrm.Page.getAttribute("pow_temperature").getValue();
-                            var Humidity  = window.parent.Xrm.Page.getAttribute("pow_humidity").getValue();
-                            //var dwi_humiditylow = window.parent.Xrm.Page.getAttribute("dwi_humiditylow").getValue();
-                            //var dwi_humidityHigh = window.parent.Xrm.Page.getAttribute("dwi_humidityhigh").getValue();
 
 
 
-
-                            document.getElementById('content').innerHTML = "<div style='width: 200px'> " +
-                                "     <ul class='list-group'>" +
-                                "        <li class='list-group-item'>City<span class='badge'>" + City + "</span></li>" +
-                                "       <li class='list-group-item'>Conditions<span class='badge'>" + Conditions + "</span></li>" +
-                                "       <li class='list-group-item'>Temp<span class='badge'>" + Temp + "</span></li>" +
-                                "       <li class='list-group-item'>Humidity<span class='badge'>" + Humidity + "</span></li>" +                                                      
-                                " </ul></div >"
+            var longitude = window.parent.Xrm.Page.getAttribute("pow_longitude").getValue();
+            var latitude = window.parent.Xrm.Page.getAttribute("pow_lattitude").getValue();
+            var City = window.parent.Xrm.Page.getAttribute("pow_city").getValue();
 
 
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: latitude, lng: longitude },
+                zoom: 15
+            });
 
-                            Popup = createPopupClass();
-                            popup = new Popup(
-                                new google.maps.LatLng(dwi_geoLocation_dwi_latitude, dwi_geoLocation_dwi_longitude),
-                                document.getElementById('content'));
-                            popup.setMap(map);
-
-                        }
-                    } else {
-                        window.parent.Xrm.Utility.alertDialog(this.statusText);
-                    }
+            var layer = new google.maps.FusionTablesLayer({
+                query: {
+                    select: 'location',
+                    from: '1xWyeuAhIFK_aED1ikkQEGmR8mINSCJO9Vq-BPQ'
+                },
+                heatmap: {
+                    enabled: false
                 }
-            };
-            req.send();
 
-            //end
+            });
 
-
+            layer.setMap(map);
 
 
+
+
+            document.getElementById('content').innerHTML = "<div style='width: 200px'> " +
+                "     <ul class='list-group'>" +
+                "       <li class='list-group-item'>City<span class='badge'>" + City + "</span></li>" +
+                "        <li class='list-group-item'>lng<span class='badge'>" + longitude + "</span></li>" +
+                "       <li class='list-group-item'>lat<span class='badge'>" + latitude + "</span></li>" +
+
+                " </ul></div >"
+               
+               
+
+
+            Popup = createPopupClass();
+            popup = new Popup(
+                new google.maps.LatLng(latitude, longitude),
+                document.getElementById('content'));
+            popup.setMap(map);
 
 
 
