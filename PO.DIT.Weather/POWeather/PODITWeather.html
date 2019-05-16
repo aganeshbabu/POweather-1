@@ -92,48 +92,33 @@
             //alert(RecordId);
             var rec = RecordId.replace("{", '').replace("}", '');
             // alert(rec);
-            var _dwi_geolocation_value = null;
-            var _dwi_geolocation_value_formatted = null;
-            var result = null;
-            // alert(window.parent.Xrm.Page.context.getClientUrl());
+         //start
             var req = new XMLHttpRequest();
-            req.open("GET", window.parent.Xrm.Page.context.getClientUrl() + "/api/data/v9.1/dwi_dailyweatherinformations(" + rec + ")?$select=_dwi_geolocation_value&$expand=dwi_geoLocation($select=dwi_city,dwi_country,dwi_geolocationid,dwi_latitude,dwi_longitude,dwi_name)", true);
+            req.open("GET", window.parent.Xrm.Page.context.getClientUrl() + "/api/data/v9.1/pow_weatherinfos(3242342342)?$select=_pow_location_value&$expand=pow_location($select=pow_city,pow_geolocationid,pow_lattitude,pow_longitude,pow_timezone)", true);
             req.setRequestHeader("OData-MaxVersion", "4.0");
             req.setRequestHeader("OData-Version", "4.0");
             req.setRequestHeader("Accept", "application/json");
             req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
             req.setRequestHeader("Prefer", "odata.include-annotations=\"*\"");
-
-            // debugger;
-
-            var dwi_geoLocation_dwi_city = null;
-            var dwi_geoLocation_dwi_country = null;
-            var dwi_geoLocation_dwi_latitude = null;
-            var dwi_geoLocation_dwi_longitude = null;
-
             req.onreadystatechange = function () {
-                // debugger;
                 if (this.readyState === 4) {
                     req.onreadystatechange = null;
                     if (this.status === 200) {
-                        debugger;
                         var result = JSON.parse(this.response);
-                        _dwi_geolocation_value = result["_dwi_geolocation_value"];
-                        var _dwi_geolocation_value_formatted = result["_dwi_geolocation_value@OData.Community.Display.V1.FormattedValue"];
-                        var _dwi_geolocation_value_lookuplogicalname = result["_dwi_geolocation_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
-                        if (result.hasOwnProperty("dwi_geoLocation")) {
-                            dwi_geoLocation_dwi_city = result["dwi_geoLocation"]["dwi_city"];
-                            dwi_geoLocation_dwi_country = result["dwi_geoLocation"]["dwi_country"];
-                            var dwi_geoLocation_dwi_geolocationid = result["dwi_geoLocation"]["dwi_geolocationid"];
-                            dwi_geoLocation_dwi_latitude = result["dwi_geoLocation"]["dwi_latitude"];
-                            var dwi_geoLocation_dwi_latitude_formatted = result["dwi_geoLocation"]["dwi_latitude@OData.Community.Display.V1.FormattedValue"];
-                            dwi_geoLocation_dwi_longitude = result["dwi_geoLocation"]["dwi_longitude"];
-                            var dwi_geoLocation_dwi_longitude_formatted = result["dwi_geoLocation"]["dwi_longitude@OData.Community.Display.V1.FormattedValue"];
-                            var dwi_geoLocation_dwi_name = result["dwi_geoLocation"]["dwi_name"];
-                            // alert(dwi_geoLocation_dwi_city);
+                        var _pow_location_value = result["_pow_location_value"];
+                        var _pow_location_value_formatted = result["_pow_location_value@OData.Community.Display.V1.FormattedValue"];
+                        var _pow_location_value_lookuplogicalname = result["_pow_location_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
+                        if (result.hasOwnProperty("pow_location")) {
+                            var pow_location_pow_city = result["pow_location"]["pow_city"];
+                            var pow_location_pow_geolocationid = result["pow_location"]["pow_geolocationid"];
+                            var pow_location_pow_lattitude = result["pow_location"]["pow_lattitude"];
+                            var pow_location_pow_lattitude_formatted = result["pow_location"]["pow_lattitude@OData.Community.Display.V1.FormattedValue"];
+                            var pow_location_pow_longitude = result["pow_location"]["pow_longitude"];
+                            var pow_location_pow_longitude_formatted = result["pow_location"]["pow_longitude@OData.Community.Display.V1.FormattedValue"];
+                            var pow_location_pow_timezone = result["pow_location"]["pow_timezone"];
 
                             var map = new google.maps.Map(document.getElementById('map'), {
-                                center: { lat: dwi_geoLocation_dwi_latitude, lng: dwi_geoLocation_dwi_longitude },
+                                center: { lat: pow_location_pow_lattitude , lng: pow_location_pow_longitude },
                                 zoom: 7
                             });
 
@@ -145,25 +130,25 @@
                                 heatmap: {
                                     enabled: false
                                 }
-                                
+
                             });
 
                             layer.setMap(map);
 
                             //change this according to your requirement -Start
-                            var City = window.parent.Xrm.Page.getAttribute("dwi_weathercity").getValue();
+                            var City = window.parent.Xrm.Page.getAttribute("pow_weathercity").getValue();
                             var Conditions = window.parent.Xrm.Page.getAttribute("dwi_dayconditions").getValue();
                             var TempLow = window.parent.Xrm.Page.getAttribute("dwi_temperaturelow").getValue();
-                             var TempHigh = window.parent.Xrm.Page.getAttribute("dwi_temperaturehigh").getValue();
+                            var TempHigh = window.parent.Xrm.Page.getAttribute("dwi_temperaturehigh").getValue();
                             var dwi_humiditylow = window.parent.Xrm.Page.getAttribute("dwi_humiditylow").getValue();
                             var dwi_humidityHigh = window.parent.Xrm.Page.getAttribute("dwi_humidityhigh").getValue();
-                            
-                            
-                       
+
+
+
 
                             document.getElementById('content').innerHTML = "<div style='width: 200px'> " +
-                                                           "     <ul class='list-group'>" +
-                                "        <li class='list-group-item'>City<span class='badge'>" + City+"</span></li>" +
+                                "     <ul class='list-group'>" +
+                                "        <li class='list-group-item'>City<span class='badge'>" + City + "</span></li>" +
                                 "       <li class='list-group-item'>Conditions<span class='badge'>" + Conditions + "</span></li>" +
                                 "       <li class='list-group-item'>Temp High<span class='badge'>" + TempHigh + "</span></li>" +
                                 "       <li class='list-group-item'>Temp Low<span class='badge'>" + TempLow + "</span></li>" +
@@ -171,15 +156,13 @@
                                 //"       <li class='list-group-item'>Humidity High <span class='badge'>" + dwi_humidityHigh + "</span></li>" +                             
                                 " </ul></div >"
 
-                            
+
 
                             Popup = createPopupClass();
                             popup = new Popup(
                                 new google.maps.LatLng(dwi_geoLocation_dwi_latitude, dwi_geoLocation_dwi_longitude),
                                 document.getElementById('content'));
                             popup.setMap(map);
-
-
 
                         }
                     } else {
@@ -188,8 +171,6 @@
                 }
             };
             req.send();
-
-
 
             //end
 

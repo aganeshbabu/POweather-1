@@ -52,6 +52,42 @@
           "file": "/POWeatherLogo.png",
           "description": "",
           "ts": null
+        },
+        {
+          "uniquename": "new_/Images/PODITLogo.png",
+          "file": "/Images/PODITLogo.png",
+          "description": "",
+          "ts": null
+        },
+        {
+          "uniquename": "new_/Images/PODITweather.png",
+          "file": "/Images/PODITweather.png",
+          "description": "",
+          "ts": null
+        },
+        {
+          "uniquename": "new_/Images/PODITWeatherLogo.png",
+          "file": "/Images/PODITWeatherLogo.png",
+          "description": "",
+          "ts": null
+        },
+        {
+          "uniquename": "new_/Images/POWeatherSiteMap.png",
+          "file": "/Images/POWeatherSiteMap.png",
+          "description": "",
+          "ts": null
+        },
+        {
+          "uniquename": "new_/PODITGeoLocation.html",
+          "file": "/PODITGeoLocation.html",
+          "description": "",
+          "ts": null
+        },
+        {
+          "uniquename": "new_/PODITWeather.html",
+          "file": "/PODITWeather.html",
+          "description": "",
+          "ts": null
         }
       ]
     }
