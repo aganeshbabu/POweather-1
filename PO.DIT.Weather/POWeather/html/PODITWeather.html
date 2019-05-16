@@ -94,7 +94,7 @@
             // alert(rec);
          //start
             var req = new XMLHttpRequest();
-            req.open("GET", window.parent.Xrm.Page.context.getClientUrl() + "/api/data/v9.1/pow_weatherinfos(3242342342)?$select=_pow_location_value&$expand=pow_location($select=pow_city,pow_geolocationid,pow_lattitude,pow_longitude,pow_timezone)", true);
+            req.open("GET", window.parent.Xrm.Page.context.getClientUrl() + "/api/data/v9.1/pow_weatherinfos(" + rec + ")?$select=_pow_location_value&$expand=pow_location($select=pow_city,pow_geolocationid,pow_lattitude,pow_longitude,pow_timezone)", true);
             req.setRequestHeader("OData-MaxVersion", "4.0");
             req.setRequestHeader("OData-Version", "4.0");
             req.setRequestHeader("Accept", "application/json");
@@ -119,7 +119,7 @@
 
                             var map = new google.maps.Map(document.getElementById('map'), {
                                 center: { lat: pow_location_pow_lattitude , lng: pow_location_pow_longitude },
-                                zoom: 7
+                                zoom: 3
                             });
 
                             var layer = new google.maps.FusionTablesLayer({
@@ -158,7 +158,7 @@
 
                             Popup = createPopupClass();
                             popup = new Popup(
-                                new google.maps.LatLng(dwi_geoLocation_dwi_latitude, dwi_geoLocation_dwi_longitude),
+                                new google.maps.LatLng(pow_location_pow_lattitude, pow_location_pow_longitude),
                                 document.getElementById('content'));
                             popup.setMap(map);
 

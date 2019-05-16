@@ -12,80 +12,8 @@
           "ts": null
         },
         {
-          "uniquename": "new_/js/mappage.html",
-          "file": "/js/mappage.html",
-          "description": null,
-          "ts": null
-        },
-        {
-          "uniquename": "new_/js/Weathermappage.html",
-          "file": "/js/Weathermappage.html",
-          "description": null,
-          "ts": null
-        },
-        {
-          "uniquename": "new_/TestOpenWeather.html",
-          "file": "/TestOpenWeather.html",
-          "description": null,
-          "ts": null
-        },
-        {
-          "uniquename": "new_/poweather.png",
-          "file": "/poweather.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/Logo.png",
-          "file": "/Logo.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/weather.png",
-          "file": "/weather.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/POWeatherLogo.png",
-          "file": "/POWeatherLogo.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/Images/PODITLogo.png",
-          "file": "/Images/PODITLogo.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/Images/PODITweather.png",
-          "file": "/Images/PODITweather.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/Images/PODITWeatherLogo.png",
-          "file": "/Images/PODITWeatherLogo.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/Images/POWeatherSiteMap.png",
-          "file": "/Images/POWeatherSiteMap.png",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/PODITGeoLocation.html",
-          "file": "/PODITGeoLocation.html",
-          "description": "",
-          "ts": null
-        },
-        {
-          "uniquename": "new_/PODITWeather.html",
-          "file": "/PODITWeather.html",
+          "uniquename": "new_/html/PODITWeather.html",
+          "file": "/html/PODITWeather.html",
           "description": "",
           "ts": null
         }
@@ -107,7 +35,7 @@
       "generateGlobalOptionsets": false,
       "generateStateEnums": true,
       "filename": "EarlyBoundTypes.cs",
-      "classNamespace": "",
+      "classNamespace": "POWeather.Webresources",
       "serviceContextName": "XrmSvc"
     }
   ],
